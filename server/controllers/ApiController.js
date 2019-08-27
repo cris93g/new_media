@@ -26,11 +26,11 @@ let getLiveStreams= async (req,res) =>{
 }
 
 let getMyFollowedStreams = async (req,res) =>{
-	let {Token} = req.body;
+	let {Id} = req.body;
 	let info = await axios.get(`https://api.twitch.tv/kraken/streams/followed`,{
 		headers:{
 			"Client-ID":KEY,
-			"Authorization":`OAuth ${Token}`
+			"Authorization":`OAuth ${Id}`
 		}
 	})
 	let results = info.data;
@@ -52,5 +52,33 @@ let getSearchChannels = async (req,res) =>{
 	}
 }
 
+let followChannel = async (req,res) =>{
+	let {channelId}=req.body
+	let {userId} = req.body
+	let info = await axios.put(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}`,{
+		headers:{
+			"Client-ID":KEY,
+		}	
+	})
+	let results = info.data;
+	if(results){
+		res.status(200).json(results)
+	}
+}
 
-module.exports = { getTopTwitchGames,getLiveStreams,getMyFollowedStreams,getSearchChannels };
+let unfollowChannel = async (req,res) =>{
+	let {channelId}= req.body
+	let {userId} = req.body
+	let info = await axios.delete(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}`,{
+		headers:{
+			"Client-ID":KEY,
+		}	
+	})
+	let results = info.data;
+	if(results){
+		res.status(200).json(results)
+	}
+}
+
+
+module.exports = { getTopTwitchGames,getLiveStreams,getMyFollowedStreams,getSearchChannels,followChannel,unfollowChannel };

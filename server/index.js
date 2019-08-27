@@ -15,8 +15,8 @@ routes(app);
 
 app.get('/login', function(req, res) {
     let client_id = KEY;
-	let redirect_uri = "http://localhost:3000";
-    let scopes = "channel_check_subscription channel:read:subscriptions user_subscriptions";
+	let redirect_uri = "http://localhost:3000/#/";
+    let scopes = "channel_check_subscription channel:read:subscriptions user_subscriptions analytics:read:games" ;
     let token= `token`
     res.redirect("https://id.twitch.tv/oauth2/authorize" +
     "?response_type=" + token +
