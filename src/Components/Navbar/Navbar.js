@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from './node_modules/react';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBCollapse, MDBContainer,
-MDBHamburgerToggler } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
+MDBHamburgerToggler } from './node_modules/mdbreact';
+import { BrowserRouter as Router } from './node_modules/react-router-dom';
 
-import {Link} from "react-router-dom"
-class Navbar extends Component {
+import {Link} from "./node_modules/react-router-dom"
+class NavBar extends Component {
 state = {
   collapse1: false,
   collapseID: ''
@@ -59,4 +59,4 @@ render() {
   }
 }
 
-export default Navbar;
+export default NavBar;
