@@ -6,9 +6,11 @@ let getUser = async (req, res) => {
 	let info = await axios.get(`https://api.twitch.tv/kraken/user`, {
 		headers: {
 			'Client-ID': KEY,
-			Authorization: `OAuth ${Id}`
+			Authorization: `OAuth ${Id}`,
+			Accept: `application/vnd.twitchtv.v5+json`
 		}
 	});
+
 	let results = info.data;
 	if (results) {
 		res.status(200).json(results);
@@ -43,7 +45,8 @@ let getMyFollowedStreams = async (req, res) => {
 	let info = await axios.get(`https://api.twitch.tv/kraken/streams/followed`, {
 		headers: {
 			'Client-ID': KEY,
-			Authorization: `OAuth ${Id}`
+			Authorization: `OAuth ${Id}`,
+			Accept: `application/vnd.twitchtv.v5+json`
 		}
 	});
 	let results = info.data;
@@ -80,13 +83,17 @@ let followChannel = async (req, res) => {
 };
 
 let unfollowChannel = async (req, res) => {
-	// console.log(Id);
+	let { Id } = req.body;
 	let { channelId } = req.body;
 	let { userId } = req.body;
+	console.log(channelId);
+	console.log(Id);
+	console.log(userId);
 	let info = await axios.delete(`https://api.twitch.tv/kraken/users/${userId}/follows/channels/${channelId}`, {
 		headers: {
 			'Client-ID': KEY,
-			Authorization: `OAuth q7ud3r5nezcywgru5nu7a2tfzyruxr`
+			Authorization: `OAuth ${Id}`,
+			Accept: `application/vnd.twitchtv.v5+json`
 		}
 	});
 	let results = info.data;

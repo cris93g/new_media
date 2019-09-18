@@ -6,9 +6,11 @@ class Followers extends Component {
 		super(props);
 		this.state = {
 			follow: {},
-			user: {}
+			userInfo: {},
+			channel: ''
 		};
 		this.unfollow = this.unfollow.bind(this);
+		this.clicks = this.clicks.bind(this);
 	}
 	componentDidMount() {
 		axios
@@ -24,25 +26,34 @@ class Followers extends Component {
 				Id: this.props.match.params.token
 			})
 			.then((response) => {
-				this.setState({ user: response.data });
+				this.setState({ userInfo: response.data });
 			});
 	}
+	clicks(e) {
+		console.log(e.currentTarget.value);
+	}
 
-	unfollow(e) {
+	unfollow(welp) {
+		console.log(this.state.userInfo._id);
+		console.log(this.state.follow._id);
 		console.log(this.props.match.params.token);
+
 		axios
-			.delete(`/api/streams/unfollow`, {
-				// Id: this.props.match.params.token,
-				userId: this.state.user._id,
-				channelId: this.state.follow._id
+			.post(`/api/streams/unfollow`, {
+				Id: this.props.match.params.token,
+				userId: this.state.userInfo._id,
+				channelId: welp
 			})
 			.then((response) => {
 				this.setState({ user: response.data });
 			});
 	}
 	render() {
-		console.log(this.state.follow);
+		console.log(this.state);
 		const { streams } = this.state.follow;
+		const { userInfo } = this.state;
+		let cha;
+		console.log(userInfo);
 		console.log(streams);
 		return (
 			<div>
@@ -54,9 +65,10 @@ class Followers extends Component {
 								<p>{stream.channel.game}</p>
 								<img style={{ width: '50px' }} src={stream.channel.logo} />
 								<p>{stream.viewers}</p>
+								<h1>{stream.channel._id}</h1>
 								<button
 									onClick={() => {
-										this.unfollow();
+										this.unfollow(stream.channel._id);
 									}}
 								/>
 							</div>

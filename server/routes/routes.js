@@ -15,5 +15,5 @@ module.exports = (app) => {
 	app.post(`/api/streams/followed`, getMyFollowedStreams);
 	app.post(`/api/streams/streams`, getSearchChannels);
 	app.put(`/api/streams/follow`, followChannel);
-	app.delete(`/api/streams/unfollow`, unfollowChannel);
+	app.post(`/api/streams/unfollow`, unfollowChannel);
 };

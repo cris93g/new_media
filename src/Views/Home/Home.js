@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
+import Hamburger from '../../assets/Hamburger';
 class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			token: ''
+			token: '',
+			user: {}
 		};
 		// this.getToken= this.getToken.bind(this)
 	}
@@ -20,7 +22,23 @@ class Home extends Component {
 
 	render() {
 		const { token } = this.state;
-		console.log(token);
+		let welp = [];
+		function log() {
+			console.log(token);
+			if (token) {
+				axios
+					.post(`/api/me`, {
+						Id: token
+					})
+					.then((response) => {
+						welp.push(response.data);
+					});
+			}
+		}
+
+		log();
+		console.log(welp);
+		console.log(this.state);
 		return (
 			<div>
 				<h1>HOME</h1>
@@ -31,6 +49,7 @@ class Home extends Component {
 				<a href={`http://localhost:3001/login`}>
 					<button>Log IN</button>
 				</a>
+				<div />
 			</div>
 		);
 	}
