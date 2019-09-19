@@ -1,0 +1,29 @@
+.nav-wrapper {
+	width: 100vw;
+	height: 8vh;
+	background-color: black;
+	display: flex;
+}
+
+.logo {
+	height: 100%;
+	width: 35%;
+}
+
+.search-wrapper {
+	height: 100%;
+	width: 35%;
+	align-content: center;
+	align-items: center;
+	display: flex;
+}
+
+input {
+	border-width: 0px;
+	border: none;
+	box-shadow: none;
+	border-bottom: 1px solid black;
+}
+input:focus {
+	outline: none !important;
+}

@@ -70,7 +70,9 @@ class Followers extends Component {
 									onClick={() => {
 										this.unfollow(stream.channel._id);
 									}}
-								/>
+								>
+									unfollow
+								</button>
 							</div>
 						);
 					})

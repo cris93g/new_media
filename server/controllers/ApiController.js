@@ -17,9 +17,10 @@ let getUser = async (req, res) => {
 	}
 };
 let getTopTwitchGames = async (req, res) => {
-	let info = await axios.get(`https://api.twitch.tv/kraken/games/top`, {
+	let info = await axios.get(`https://api.twitch.tv/kraken/games/top?&limit=5`, {
 		headers: {
-			'Client-ID': KEY
+			'Client-ID': KEY,
+			Accept: `application/vnd.twitchtv.v5+json`
 		}
 	});
 	let results = info.data;
@@ -29,9 +30,10 @@ let getTopTwitchGames = async (req, res) => {
 };
 
 let getLiveStreams = async (req, res) => {
-	let info = await axios.get(`https://api.twitch.tv/kraken/streams/`, {
+	let info = await axios.get(`https://api.twitch.tv/kraken/streams/?&limit=5`, {
 		headers: {
-			'Client-ID': KEY
+			'Client-ID': KEY,
+			Accept: `application/vnd.twitchtv.v5+json`
 		}
 	});
 	let results = info.data;
@@ -59,7 +61,8 @@ let getSearchChannels = async (req, res) => {
 	let { search } = req.body;
 	let info = await axios.get(`https://api.twitch.tv/kraken/search/channels?query=${search}`, {
 		headers: {
-			'Client-ID': KEY
+			'Client-ID': KEY,
+			Accept: `application/vnd.twitchtv.v5+json`
 		}
 	});
 	let results = info.data;
@@ -102,6 +105,19 @@ let unfollowChannel = async (req, res) => {
 	}
 };
 
+let getFeaturedStreams = async (req, res) => {
+	let info = await axios.get(`https://api.twitch.tv/kraken/streams/featured?&limit=5`, {
+		headers: {
+			'Client-ID': KEY,
+			Accept: `application/vnd.twitchtv.v5+json`
+		}
+	});
+	let results = info.data;
+	if (results) {
+		res.status(200).json(results);
+	}
+};
+
 module.exports = {
 	getTopTwitchGames,
 	getLiveStreams,
@@ -109,5 +125,6 @@ module.exports = {
 	getSearchChannels,
 	followChannel,
 	unfollowChannel,
-	getUser
+	getUser,
+	getFeaturedStreams
 };

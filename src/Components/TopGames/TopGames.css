@@ -1,0 +1,9 @@
+.Top-Games {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+	margin-top: 10px;
+}
